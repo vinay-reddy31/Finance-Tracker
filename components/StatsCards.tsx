@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 
 export default function StatsCards({ transactions }: { transactions: any[] }) {
   // Convert amounts to numbers

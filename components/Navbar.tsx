@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { ChevronDown, LogOut } from "lucide-react";
 import { keycloakConfig } from "@/lib/config";
+import Image from "next/image"; 
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const { data: session } = useSession();
-  const router = useRouter();
 
   const handleLogout = async () => {
     try {
@@ -47,7 +46,7 @@ export default function Navbar() {
             onClick={() => setShowDropdown(!showDropdown)}
             className="flex items-center gap-2 text-white hover:bg-indigo-800 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-colors"
           >
-            <img
+            <Image
               src="https://i.pravatar.cc/40"
               alt="Profile"
               className="w-8 h-8 rounded-full"

@@ -49,6 +49,8 @@ export default function Navbar() {
             <Image
               src="https://i.pravatar.cc/40"
               alt="Profile"
+              width={32}
+              height={32}
               className="w-8 h-8 rounded-full"
             />
             {/* Hide "Profile" text on small screens */}

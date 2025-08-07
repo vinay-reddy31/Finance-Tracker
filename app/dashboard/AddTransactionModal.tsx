@@ -33,10 +33,18 @@ export default function AddTransactionModal({ onClose, onAdded }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
+    // Fix timezone issue by adding time component
+    const dateWithTime = form.date + 'T12:00:00';
+    const formData = {
+      ...form,
+      date: new Date(dateWithTime).toISOString().split('T')[0]
+    };
+    
     await fetch("/api/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(formData),
     });
     onAdded();
     onClose();

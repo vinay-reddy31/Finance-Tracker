@@ -21,10 +21,13 @@ export async function POST(request: Request) {
     const userId = await getUserId();
     const { type, title, amount, category, description, date } = await request.json();
 
+    // Fix: Ensure date is treated as local date
+    const localDate = new Date(date + 'T12:00:00');
+    
     await pool.query(
       `INSERT INTO transactions (type, title, amount, category, description, date, user_id)
        VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-      [type, title, amount, category, description, date, userId]
+      [type, title, amount, category, description, localDate.toISOString().split('T')[0], userId]
     );
 
     return NextResponse.json({ message: "Transaction added successfully" });

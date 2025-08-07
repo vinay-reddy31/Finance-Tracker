@@ -1,7 +1,15 @@
 "use client";
 
 export default function StatsCards({ transactions }: { transactions: any[] }) {
-  // Convert amounts to numbers
+  if (!Array.isArray(transactions)) {
+    console.error("Expected transactions to be an array but got:", transactions);
+    return (
+      <div className="text-red-500">
+        Failed to load transactions. Please try logging in again.
+      </div>
+    );
+  }
+
   const totalIncome = transactions
     .filter((t) => t.type === "income")
     .reduce((acc, t) => acc + Number(t.amount), 0);
